@@ -1,0 +1,55 @@
+Problem statement
+You're given a string 'S' consisting of "{", "}", "(", ")", "[" and "]" .
+
+R
+For example:
+'S' = "{}()".
+
+There is always an opening brace before a closing brace i.e. '{' before '}', '(' before ').
+So the 'S' is Balanced.
+Detailed explanation ( Input/output format, Notes, Images )
+Sample Input 1 :
+[()]{}{[()()]()}
+Sample Output 1 :
+Balanced
+Explanation Of the Sample Input 1 :
+There is always an opening brace before a closing brace i.e. '{' before '}', '(' before '), '[' before ']'.
+So the 'S' is Balanced.
+Sample Input 2 :
+[[}[
+Sample Output 2 :
+Not Balanced
+Constraints:
+1 <= 'N' <= 10^5
+
+Where 'N' is the length of the input string 'S'.
+Time Limit: 1 sec
+
+
+SOLUTION:
+
+bool isValidParenthesis(string s)
+{
+    stack<char> stack;
+    for(int i=0;i<s.length();i++){
+      if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+        stack.push(s[i]);
+      else if (s[i] == ')') {
+        if (!stack.empty() && stack.top() == '(')
+          stack.pop();
+        else
+          return false;
+      } else if (s[i] == '}') {
+        if (!stack.empty() && stack.top() == '{')
+          stack.pop();
+          else 
+          return false;
+      } else if (s[i] == ']') {
+          if(!stack.empty() && stack.top()=='[')
+          stack.pop();
+          else 
+          return false;
+      }
+    }
+     return stack.empty();  
+}
